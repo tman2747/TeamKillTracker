@@ -20,12 +20,16 @@ def get_leaderboard():
         return db.fetchall()
 
 def run():
-    intents = discord.Intents.all()
+    intents = discord.Intents.default()  # Use the default template
+    intents.messages = True  # Enable the messages intent
+    intents.guilds = True  # Enable the guilds intent
+    intents.members = True  # Necessary for accessing member info like names and IDs
     bot = commands.Bot(command_prefix='!', intents=intents)
 
     @bot.event
     async def on_ready():
         print(f"Bot is now ready for use as {bot.user}")
+        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="For !tk"))
 
     @bot.group(invoke_without_command=True)
     async def tk(ctx, player: discord.Member=None):
