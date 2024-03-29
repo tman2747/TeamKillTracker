@@ -15,5 +15,6 @@ I developed this Team Kill Tracker bot to keep track of team kills among  me my 
 - `!tk help` - Show help information for the bot.
 - `!tk` - Displays: `Use !tk @DiscordUser to record a team kill for the specified player.` 
 
+
 ## Future
 - Make the leaderboard display prettier using discord embed 
