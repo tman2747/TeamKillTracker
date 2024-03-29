@@ -1,0 +1,13 @@
+[Unit]
+Description=Discord Bot Service
+After=network.target
+
+[Service]
+Type=simple
+User=tman2747
+WorkingDirectory=/home/tman2747/discordBot/TeamKillTracker
+ExecStart=/home/tman2747/discordBot/TeamKillTracker/venv/bin/python /home/tman2747/discordBot/TeamKillTracker/main.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
