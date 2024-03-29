@@ -30,14 +30,14 @@ def run():
     @bot.group(invoke_without_command=True)
     async def tk(ctx, player: discord.Member=None):
         if player is None:
-            await ctx.send("Use `!tk @[Player]` to record a team kill for the specified player.")
+            await ctx.send("Use `!tk @DiscordUser` to record a team kill for the specified player.")
             return
         update_kills(str(player.id), player.display_name)
         await ctx.send(f"Kill counted for {player.display_name}.")
 
     @tk.command()
     async def help(ctx):
-        help_message = ('Use `!tk [Player]` to record a team kill for the specified player.\n'
+        help_message = ('Use `!tk @DiscordUser` to record a team kill for the specified player.\n'
                         'Use `!tk leaderboard` to display the current leaderboard of team kills.\n'
                         'For example, `!tk @username` will add a kill to that user\'s count.')
         await ctx.send(help_message)
