@@ -25,15 +25,24 @@ def run():
 
     @bot.event
     async def on_ready():
-        print("Bot is now ready for use")
-        print(bot.user)
+        print(f"Bot is now ready for use as {bot.user}")
 
-    @bot.command()
-    async def TK(ctx, Player: discord.Member):
-        update_kills(str(Player.id), Player.display_name)
-        await ctx.send(f"Kill counted for {Player.display_name}")
+    @bot.group(invoke_without_command=True)
+    async def tk(ctx, player: discord.Member=None):
+        if player is None:
+            await ctx.send("Use `!tk @[Player]` to record a team kill for the specified player.")
+            return
+        update_kills(str(player.id), player.display_name)
+        await ctx.send(f"Kill counted for {player.display_name}.")
 
-    @bot.command()
+    @tk.command()
+    async def help(ctx):
+        help_message = ('Use `!tk [Player]` to record a team kill for the specified player.\n'
+                        'Use `!tk leaderboard` to display the current leaderboard of team kills.\n'
+                        'For example, `!tk @username` will add a kill to that user\'s count.')
+        await ctx.send(help_message)
+
+    @tk.command()
     async def leaderboard(ctx):
         leaderboard_data = get_leaderboard()
         if not leaderboard_data:
@@ -42,7 +51,7 @@ def run():
 
         leaderboard_message = "Leaderboard:\n"
         for player_name, kills, last_updated in leaderboard_data:
-            last_kill_date = last_updated.split(' ')[0] 
+            last_kill_date = last_updated.split(' ')[0]
             leaderboard_message += f"{player_name}: {kills} kills (Last Teamkill: {last_kill_date})\n"
         await ctx.send(leaderboard_message)
 
