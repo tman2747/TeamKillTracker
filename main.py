@@ -20,10 +20,7 @@ def get_leaderboard():
         return db.fetchall()
 
 def run():
-    intents = discord.Intents.default()  # Use the default template
-    intents.messages = True  # Enable the messages intent
-    intents.guilds = True  # Enable the guilds intent
-    intents.members = True  # Necessary for accessing member info like names and IDs
+    intents = discord.Intents.all()
     bot = commands.Bot(command_prefix='!', intents=intents)
 
     @bot.event
