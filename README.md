@@ -2,7 +2,7 @@
 
 ## Overview
 
-I developed this Team Kill Tracker bot to keep track of team kills among  me my friends during our games. I am hosting this bot on a Raspberry Pi in my basement :) For the database, I'm using SQLite3.
+I developed this Team Kill Tracker bot to keep track of team kills among  me my friends during our games. I am hosting this bot on a Raspberry Pi 🥧 in my basement :) For the database, I'm using SQLite3.
 
 ## Features
 
