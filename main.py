@@ -2,6 +2,8 @@ import settings
 import discord
 from discord.ext import commands
 import sqlite3
+import paho.mqtt.publish as publish
+
 
 def update_kills(player_id, player_name):
     with sqlite3.connect("DiscordBot.db") as conn:
@@ -42,6 +44,16 @@ def run():
                         'Use `!tk leaderboard` to display the current leaderboard of team kills.\n'
                         'For example, `!tk @username` will add a kill to that user\'s count.')
         await ctx.send(help_message)
+
+    @tk.command()
+    async def feedchicken(ctx):
+        feedbackmessage = ('Feed Chicken message sent')
+        usernamemqtt = settings.usernamemqtt
+        passwordmqtt = settings.password
+        dns = settings.dns
+        auth = {'username': usernamemqtt, 'password': passwordmqtt}
+        publish.single("test/testing", "next", hostname=dns, auth=auth,port=1883)
+        await ctx.send(feedbackmessage)
 
     @tk.command()
     async def leaderboard(ctx):
